@@ -13,13 +13,13 @@ protocol Serialize {
     static func parse(data: Data) -> model?
 }
 
-final class ParseJson: Serialize {
+final class ParseJson<T:Codable>: Serialize {
     
-    typealias model = Location
-    class func parse(data: Data) -> Location? {
+    typealias model = T
+    class func parse(data: Data) -> T? {
         do {
             let decoder = JSONDecoder()
-            let result = try decoder.decode(Location.self, from:data)
+            let result = try decoder.decode(T.self, from:data)
             return result
         } catch {
             print("JSON Error: \(error)")
