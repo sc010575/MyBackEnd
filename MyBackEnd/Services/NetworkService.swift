@@ -10,7 +10,7 @@ import Foundation
 
 enum FetchInfoError: String {
     case locationError = "We're having trouble finding the location"
-    case serverError = "The weather service is not working."
+    case serverError = "The service is not working."
     case networkError = "The network appears to be down."
     case dataError = "We're having trouble processing weather data."
     case urlError = "We're having trouble with the specified URL."
@@ -109,8 +109,13 @@ class NetworkService: ApiResource {
                 }
 
             }
+            else{
+                success = false
+                DispatchQueue.main.async {
 
-
+                    completion(success, nil, FetchInfoError.serverError.rawValue)
+                }
+            }
         })
         dataTask?.resume()
     }

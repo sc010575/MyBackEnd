@@ -10,6 +10,7 @@ import Foundation
 
 enum RequestType: String{
     case location   = "update_location"
+    case register   = "register"
 }
 
 protocol ApiResource  {
@@ -18,7 +19,7 @@ protocol ApiResource  {
 
 extension ApiResource {
     var url: URL? {
-        let baseUrl = "http://127.0.0.1:5000"
+        let baseUrl = "http://192.168.0.25:5000"
         let url = baseUrl + "/" + requestType.rawValue
         guard let finalUrl = URL(string: url) else { return nil}
         return finalUrl
